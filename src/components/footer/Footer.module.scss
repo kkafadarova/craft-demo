@@ -1,0 +1,18 @@
+.footer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+
+  button {
+    flex: 1 1 150px;
+  }
+
+  .orText {
+    flex: 0 0 auto;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #000;
+  }
+}
