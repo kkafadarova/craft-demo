@@ -1,8 +1,8 @@
 import type { FormData, FormErrors } from "../types";
 
+const MAX_LENGTH = 40;
 export function computeErrors(form: FormData): FormErrors {
   const errors: FormErrors = {};
-  const MAX_LEN = 40;
 
   if (!form.label.trim()) {
     errors.label = "Label is required.";
@@ -22,9 +22,9 @@ export function computeErrors(form: FormData): FormErrors {
     errors.choices = "Duplicate choices are not allowed.";
   }
 
-  const linesOver40 = choicesArray.filter((line) => line.length > MAX_LEN);
-  if (linesOver40.length > 0) {
-    errors.choices = `Each choice must be ≤ ${MAX_LEN} characters.`;
+  const filteredLines = choicesArray.filter((line) => line.length > MAX_LENGTH);
+  if (filteredLines.length > 0) {
+    errors.choices = `Each choice must be ≤ ${MAX_LENGTH} characters.`;
   }
 
   if (

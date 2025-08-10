@@ -1,6 +1,6 @@
 # Field Builder App
 
-A React + TypeScript application for building customizable form fields with real-time validation, persistence, and flexible configuration.
+A React + TypeScript application for building customizable form fields.
 
 ## Features
 
@@ -19,6 +19,7 @@ A React + TypeScript application for building customizable form fields with real
 
 - **React** (with Hooks)
 - **TypeScript**
+- **NodeJS**
 - **SCSS Modules** for styling
 - **Jest** + **React Testing Library** for testing
 
@@ -59,7 +60,13 @@ npm install
 npm run dev
 ```
 
-### 3. Run tests
+### 3. Run the backend server
+
+```bash
+npm run start:server
+```
+
+### 4. Run tests
 
 ```bash
 npm run test
