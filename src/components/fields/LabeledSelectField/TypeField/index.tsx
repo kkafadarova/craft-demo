@@ -1,9 +1,9 @@
-import type { FieldProps } from "../../../../types";
+import { TypeOptionValue, type FieldProps } from "../../../../types";
 import LabeledSelectField from "../index";
 
 const TYPE_OPTIONS = [
-  { value: "single", label: "Single select" },
-  { value: "multi", label: "Multi-select" },
+  { value: TypeOptionValue.SINGLE, label: "Single select" },
+  { value: TypeOptionValue.MULTI, label: "Multi-select" },
 ];
 
 const TypeField = ({ value, onChange }: FieldProps) => {

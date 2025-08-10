@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import LabelField from "./index";
-//
+
 describe("LabelField", () => {
   const setup = (value = "", onChange = jest.fn(), error?: string) => {
     render(<LabelField value={value} onChange={onChange} error={error} />);

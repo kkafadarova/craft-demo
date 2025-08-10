@@ -52,6 +52,28 @@ export type ButtonProps = {
   variant?: "primary" | "negative";
 };
 
+type OptionProps = {
+  value: string;
+  label: string;
+};
+
+export type LabeledSelectFieldProps = {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: OptionProps[];
+};
+
+export enum OrderOptionValue {
+  ASC = "asc",
+  DESC = "desc",
+}
+
+export enum TypeOptionValue {
+  SINGLE = "single",
+  MULTI = "multi",
+}
+
 
 
 

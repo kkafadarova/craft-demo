@@ -5,7 +5,6 @@ const ChoicesField: React.FC<FieldProps> = ({ value, onChange, error }) => {
   return (
     <div className={styles.field}>
       <label className={styles.label}>Choices</label>
-
       <div className={styles.control}>
         <textarea
           rows={6}

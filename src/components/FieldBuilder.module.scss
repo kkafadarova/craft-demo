@@ -42,6 +42,12 @@
   flex-direction: column;
 }
 
+.checkbox {
+  width: 16px;
+  height: 16px;
+  align-self: center;
+}
+
 .input,
 .textarea {
   width: 100%;
@@ -64,7 +70,7 @@ select {
   width: 100%;
   max-width: 520px;
   height: 38px;
-  padding: 0 2rem 0 0.75rem;
+  padding: 0 2rem 0 0.75rem; 
   border-radius: 4px;
   border: 1px solid #ccc;
   background: #fff;
@@ -72,6 +78,11 @@ select {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  background-image: url("/quickbase-frontend-demo/src/icons/arrow_down.svg");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px auto; 
 }
 
 .input:focus,

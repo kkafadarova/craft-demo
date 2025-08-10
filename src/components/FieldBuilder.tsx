@@ -17,7 +17,6 @@ const FieldBuilder: React.FC = () => {
 
   const handleSubmit = async () => {
     const validationErrors = validateForm();
-    console.log(validationErrors);
     if (Object.keys(validationErrors).length > 0) {
       return;
     }
@@ -29,14 +28,16 @@ const FieldBuilder: React.FC = () => {
       .map((c) => c.trim())
       .filter((c) => c);
 
-    const finalChoices = Array.from(
-      new Set([
-        ...choicesArray,
-        ...(form.defaultValue && !choicesArray.includes(form.defaultValue)
-          ? [form.defaultValue]
-          : []),
-      ])
-    ).slice(0, 50);
+    const choicesSet = new Set(choicesArray);
+
+    if (form.defaultValue && !choicesSet.has(form.defaultValue)) {
+      choicesSet.add(form.defaultValue);
+    }
+
+    const finalChoices = Array.from(choicesSet).slice(0, 50);
+    /**
+     * the final choices cannot be more than 50 choices total
+     */
 
     const payload = {
       ...form,
@@ -62,29 +63,30 @@ const FieldBuilder: React.FC = () => {
       <div className={styles.body}>
         <LabelField
           value={form.label}
-          onChange={(val) => updateForm({ label: val })}
+          onChange={(label) => updateForm({ label })}
           error={errors.label}
         />
         <DefaultValueField
           value={form.defaultValue}
-          onChange={(val) => updateForm({ defaultValue: val })}
+          onChange={(defaultValue) => updateForm({ defaultValue })}
+          error={errors.defaultValue}
         />
         <TypeField
           value={form.type}
-          onChange={(val) => updateForm({ type: val })}
+          onChange={(type) => updateForm({ type })}
         />
         <RequiredCheckboxField
           value={form.required}
-          onChange={(val) => updateForm({ required: val })}
+          onChange={(required) => updateForm({ required })}
         />
         <ChoicesField
           value={form.choices}
-          onChange={(val) => updateForm({ choices: val })}
+          onChange={(choices) => updateForm({ choices })}
           error={errors.choices}
         />
         <OrderField
           value={form.order}
-          onChange={(val) => updateForm({ order: val })}
+          onChange={(order) => updateForm({ order })}
         />
 
         <Footer

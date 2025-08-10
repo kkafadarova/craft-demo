@@ -1,12 +1,12 @@
 import { computeErrors } from "./";
-import type { FormData } from "../types";
+import { OrderOptionValue, type FormData } from "../types";
 
 const baseForm: FormData = {
   label: "Test",
   defaultValue: "",
   choices: "",
   required: false,
-  order: "asc",
+  order: OrderOptionValue.ASC,
   type: "",
 };
 

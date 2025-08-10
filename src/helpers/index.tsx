@@ -20,7 +20,6 @@ export function computeErrors(form: FormData): FormErrors {
   if (uniqueChoices.size !== choicesArray.length) {
     errors.choices = "Duplicate choices are not allowed.";
   }
-
   if (
     form.defaultValue &&
     !choicesArray.includes(form.defaultValue) &&

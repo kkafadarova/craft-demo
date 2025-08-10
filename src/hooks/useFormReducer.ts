@@ -1,6 +1,6 @@
 import { useReducer, useEffect } from "react";
 import type { State, Action, FormData, FormErrors } from "../types";
-import { ActionType } from "../types";
+import { ActionType, OrderOptionValue, TypeOptionValue } from "../types";
 import { computeErrors } from "../helpers";
 
 const initialState: State = {
@@ -9,8 +9,8 @@ const initialState: State = {
     defaultValue: "",
     choices: "",
     required: false,
-    order: "asc",
-    type: "",
+    order: OrderOptionValue.ASC,
+    type: TypeOptionValue.SINGLE,
   },
   errors: {},
 };
@@ -18,43 +18,41 @@ const initialState: State = {
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case ActionType.UPDATE:
-      return {
-        ...state,
-        form: { ...state.form, ...action.payload },
-      };
-
+      return { ...state, form: { ...state.form, ...action.payload } };
     case ActionType.RESET:
       return initialState;
-
     case ActionType.VALIDATE:
-      return {
-        ...state,
-        errors: action.payload,
-      };
-
+      return { ...state, errors: action.payload };
     default:
       return state;
   }
 }
 
 export function useFormReducer(key = "fieldForm") {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    const saved = localStorage.getItem(key);
-    if (saved) {
+  const [state, dispatch] = useReducer(
+    reducer,
+    initialState,
+    (init: State): State => {
       try {
-        const parsed = JSON.parse(saved);
-        dispatch({ type: ActionType.UPDATE, payload: parsed });
+        const saved = localStorage.getItem(key);
+        if (saved) {
+          const parsed = JSON.parse(saved) as Partial<FormData>;
+          return {
+            form: { ...init.form, ...parsed },
+            errors: {},
+          };
+        }
       } catch (e) {
-        console.error("Invalid saved form:", e);
+        console.warn("Invalid saved form:", e);
       }
+      return init;
     }
-  }, [key]);
+  );
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(state.form));
-  }, [state.form, key]);
+    const serialized = JSON.stringify(state.form);
+    localStorage.setItem(key, serialized);
+  }, [key, state.form]);
 
   const updateForm = (payload: Partial<FormData>) =>
     dispatch({ type: ActionType.UPDATE, payload });
@@ -70,11 +68,5 @@ export function useFormReducer(key = "fieldForm") {
     return errors;
   };
 
-  return {
-    form: state.form,
-    errors: state.errors,
-    updateForm,
-    resetForm,
-    validateForm,
-  };
+  return { form: state.form, errors: state.errors, updateForm, resetForm, validateForm };
 }

@@ -1,5 +1,5 @@
 import type { RequiredCheckboxFieldProps } from "../../../types";
-import styles from "./RequiredCheckboxField.module.scss";
+import styles from "../../FieldBuilder.module.scss";
 
 const RequiredCheckboxField = ({
   value,
@@ -7,15 +7,13 @@ const RequiredCheckboxField = ({
 }: RequiredCheckboxFieldProps) => {
   return (
     <div className={styles.field}>
-      <label className={styles.checkboxLabel}>
-        <input
-          type="checkbox"
-          checked={value}
-          onChange={(e) => onChange(e.target.checked)}
-          className={styles.checkbox}
-        />
-        A value is required
-      </label>
+      <label className={styles.label}>A value is required</label>
+      <input
+        type="checkbox"
+        checked={value}
+        onChange={(e) => onChange(e.target.checked)}
+        className={styles.checkbox}
+      />
     </div>
   );
 };

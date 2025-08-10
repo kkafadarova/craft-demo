@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { useFormReducer } from "./useFormReducer";
-import type { FormErrors } from "../types";
+import { OrderOptionValue, type FormErrors } from "../types";
 import * as helpers from "../helpers";
 
 describe("useFormReducer", () => {
@@ -17,7 +17,7 @@ describe("useFormReducer", () => {
       defaultValue: "Def",
       choices: "One\nTwo",
       required: true,
-      order: "asc",
+      order: OrderOptionValue.ASC,
       type: "text",
     };
     localStorage.setItem("fieldForm", JSON.stringify(savedForm));
